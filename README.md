@@ -10,6 +10,7 @@ Proyecto de AD y PSP sobre una API REST.
     5) Curl
     6) Body-parser
     7) Morgan (morgan y morgan-body)
+    8) mongoose
 
 2. Añadida estructura inicial del proyecto (18/01/2021):
     - controllers

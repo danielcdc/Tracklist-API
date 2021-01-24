@@ -9,6 +9,7 @@ import morganBody from "morgan-body";
 // Importación de componentes de la API
 import models from './models';
 import controllers from './controllers'
+import routes from './routes'
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'))
 morganBody(app);
+
+// Enrutamiento
+
 
 
 app.listen(process.env.PORT, () =>
