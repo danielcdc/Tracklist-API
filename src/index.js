@@ -10,6 +10,7 @@ import morganBody from "morgan-body";
 import models from './models';
 import controllers from './controllers'
 import routes from './routes'
+import passport from './services/passport';
 
 const app = express();
 

@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import 'dotenv/config';
+import bcrypt from 'bcryptjs';
+
 
 // Objeto esquema.
 const { Schema } = moongose;
@@ -37,6 +40,11 @@ const userRepository = {
       return result != null ? result : undefined;
     },
 
+    async findByUsername(username){
+      const result = await User.find({'nameUser':username});
+      return result != null ? result : undefined;
+    },
+
     async createUser(newUser) {
 
       const theUser = new User({
@@ -44,7 +52,7 @@ const userRepository = {
         nameLast : newUser.nameLast,
         nameUser : newUser.nameUser,
         email : newUser.email,
-        password : newUser.password
+        password : bcrypt.hashSync(newUser.password, parseInt(process.env.BCRYPT_ROUNDS))
       });
   
       const result = await theUser.save();
@@ -63,8 +71,17 @@ const userRepository = {
 
     async delete(id) {
       await User.findbyIdAndRemove(id).exec();
+    },
+
+    toDto(){
+      return {
+        nameFirst: this.nameFirst, 
+        nameLast: this.nameLast,
+        nameUser: this.nameUser,
+        email: this.email
+      }
     }
-    
+
   }
 
   export {
