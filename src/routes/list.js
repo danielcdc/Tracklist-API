@@ -1,8 +1,8 @@
-import { Router } from express;
-import { listController } from '../controllers/list'
+import { Router } from 'express';
+import listController from '../controllers/list.js'
 import { param, body } from 'express-validator';
-import { validar } from '../middlewares/validation'
-import { token } from '../services/passport';
+import { validar } from '../middlewares/validation.js'
+import { token } from '../services/passport/index.js';
 
 
 const router = Router();
@@ -24,9 +24,9 @@ router.delete('/list/:id', token(),[param(_id).exists().withMessage('Se debe pro
     validar,
     listController.deleteListById);
 
-router.post('/lists/:id1/songs/:id2', listController.addSongToList);
-router.get('/lists/:id1/songs', listController.showAllSongsFromList);
-router.get('/lists/:id1/songs/:id2', listController.showOneSongFromList);
-router.delete('/lists/:id1/songs/:id2', listController.deleteOneSongFromList);
+router.post('/lists/:id_list/songs/:id_song', token(), listController.addSongToList);
+router.get('/lists/:id_list/songs', token(), listController.showAllSongsFromList);
+router.get('/lists/:id_list/songs/:id_song', token(), listController.showOneSongFromList);
+router.delete('/lists/:id_list/songs/:id_song', token(), listController.deleteOneSongFromList);
 
 export default router;

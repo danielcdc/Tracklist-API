@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import 'dotenv/config';
+import 'dotenv/config.js';
 import bcrypt from 'bcryptjs';
 
 
 // Objeto esquema.
-const { Schema } = moongose;
+const { Schema } = mongoose;
 
 // Definición del esquema de un usuario.
 const userSchema = new Schema({
@@ -26,7 +26,7 @@ const userSchema = new Schema({
   });
 
 // Objeto modelo creado a partir del esquema.
-const User = moongose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 const userRepository = {
 
@@ -59,8 +59,8 @@ const userRepository = {
       return result;
     },
 
-    updateById(id, modifiedUser) {
-      const userSaved = await User.findById(id);
+    async updateById(id, modifiedUser) {
+      const userSaved = await User.findById(id).exec();
 
       if(userSaved != null ){
         return await Object.assign(userSaved, modifiedUser).save();

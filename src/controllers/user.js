@@ -1,6 +1,6 @@
-import { userRepository } from '../models/user'
+import { userRepository } from '../models/user.js'
 
-const UserController = {
+const userController = {
 
     showUsers : async (req, res) => {
         let data = await userRepository.findAll();
@@ -57,4 +57,4 @@ const UserController = {
     }
 }
 
-export default UserController;
+export default userController;

@@ -1,4 +1,5 @@
-import listRepository from '../models/list'
+import {listRepository} from '../models/list.js'
+import {songRepository} from '../models/song.js'
 
 const ListController = {
     showLists: async (req, res) => {
@@ -40,7 +41,7 @@ const ListController = {
         }
     },
     deleteListById: async (req, res) => {
-        const listToDelete = await listRepository.findById.(req.params.id);
+        const listToDelete = await listRepository.findById(req.params.id);
         if (listToDelete != undefined) {
             await listRepository.delete(req.params.id);
             res.sendStatus(204)
@@ -48,6 +49,36 @@ const ListController = {
             res.sendStatus(404).withMessage("Lista no encontrada.")
         }
     },
+
+    addSongToList: async (req, res) => {
+        let theSong = await songRepository.findById(req.params.id_song);
+        if(theSong != undefined) {
+            let theList = await listRepository.findById(req.params.id_list);
+            if(theList != undefined) {
+                theList.songs.push(theSong._id)
+                await theList.save();
+                res.sendStatus(202);
+            } else {
+                res.status(400).json({
+                    mensaje: `La lista con ID: ${req.param.id_list} no está registrada en la base de datos.`
+                })
+            }
+        } else {
+            res.status(400).json({
+                mensaje: `La canción con ID: ${req.param.id_song} no está registrada en la base de datos.`
+            });
+        }
+    },
+    showAllSongsFromList: async (req, res) => {
+        // Encontrar la lista 
+        let theList = await listRepository.findById(req.params.id_list).exec();
+        if(theList != undefined){
+            res.status(200).json(theList.songs)
+        } else {
+            res.sendStatus(404);
+        }
+    }
+
 
 }
 

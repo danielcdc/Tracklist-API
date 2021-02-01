@@ -1,7 +1,7 @@
-import 'dotenv/config';
-import { User, userRepository } from '../models/users';
+import 'dotenv/config.js';
+import { User, userRepository } from '../models/user.js';
 import bcrypt from 'bcryptjs';
-import { JwtService } from '../services/jwt';
+import { JwtService } from '../services/jwt/index.js';
 
 const AuthController = {
 

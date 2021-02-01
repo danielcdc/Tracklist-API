@@ -1,12 +1,9 @@
-import { Router } from express;
-import { songController } from '../controllers/song'
+import { Router } from 'express';
+import songController from '../controllers/song.js'
 import { param, body } from 'express-validator';
-import router from "./list";
-import { validar } from '../middlewares/validation'
-import { token } from '../services/passport';
-
-
-const router = Router();
+import router from "./list.js";
+import { validar } from '../middlewares/validation.js'
+import { token } from '../services/passport/index.js';
 
 router.post('/songs', token(), songController.addSong);
 router.get('/songs', token(), songController.showSongs);
@@ -21,5 +18,6 @@ router.delete('/songs/:id', token(), [param(_id).exists().withMessage('Se debe p
     validar,
     songController.deleteSongById);
 
+// const router = Router();
 
 export default router;

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { Song, songRepository } from './song.js'
 const { Schema } = moongose;
 
 const listSchema = new Schema({
@@ -12,9 +13,8 @@ const listSchema = new Schema({
       "type": "String"
     },
     "songs": {
-      "type": [
-        "Mixed"
-      ]
+      "type": moongose.ObjectId,
+      "ref": Song
     }
   })
 
@@ -38,7 +38,7 @@ const listSchema = new Schema({
     },
 
     async findById(id) {
-      const result = await List.findById(id).exec();
+      const result = await List.findById(id).populate('songs').exec();
       return result != null ? result : undefined;
     },
 
@@ -53,8 +53,7 @@ const listSchema = new Schema({
 
     async deleteById(id){
       await List.findByAndRemove(id).exec();
-    }
-
+    },
    
   }
 

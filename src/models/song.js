@@ -41,7 +41,7 @@ const songRepository = {
     return result;
   },
 
-  update(id, modifiedSong) {
+  async update(id, modifiedSong) {
     const songSaved = await Song.findById(id);
 
     if(songSaved != null) {

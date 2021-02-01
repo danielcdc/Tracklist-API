@@ -1,7 +1,7 @@
-import songRepository from '../models/song'
+import { songRepository } from '../models/song.js'
 
 const SongController = {
-    showSong: (req, res) => {
+    showSong: async (req, res) => {
         let data = await songRepository.findAll();
         if (Array.isArray(data) && data.length > 0){
             res.status(200).json(data);
@@ -9,7 +9,7 @@ const SongController = {
             res.sendStatus(404).withMessage("Canción no encontrada.");
         }
     },
-    showSongById: (req, res) => {
+    showSongById: async (req, res) => {
         let song = await res.SongController.findById(req.param.id);
         if(song != undefined){
             res.status(200).json(song);
@@ -17,7 +17,7 @@ const SongController = {
             res.sendStatus(404).withMessage("Canción no encontrada.");
         } 
     },
-    addSong: (req, res) => {
+    addSong: async (req, res) => {
         let newSong = await res.SongController.create({
             title: req.body.title,
             artist: req.body.artist,
@@ -26,7 +26,7 @@ const SongController = {
         });
         res.sendStatus(201).json(newSong);
     },
-    updateSongById: (req, res) => {
+    updateSongById: async (req, res) => {
         let modifiedSong = await songRepository.updateSongById(req.params.id,{ 
             title: req.body.title,
             artist: req.body.artist,
@@ -39,7 +39,7 @@ const SongController = {
             res.status(200).json(modifiedSong);
         }
     },
-    delteSongById: (req, res) => {
+    delteSongById: async (req, res) => {
         const songToDelete = await songRepository.findById(req.params.id);
         if (songToDelete != undefined) {
             await songRepository.delete(req.params.id);
