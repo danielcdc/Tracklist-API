@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { Song, songRepository } from './song.js'
-const { Schema } = moongose;
+const { Schema } = mongoose;
 
 const listSchema = new Schema({
     "name": {
@@ -13,7 +13,7 @@ const listSchema = new Schema({
       "type": "String"
     },
     "songs": {
-      "type": moongose.ObjectId,
+      "type": mongoose.ObjectId,
       "ref": Song
     }
   })
@@ -57,7 +57,7 @@ const listSchema = new Schema({
    
   }
 
-  const List = moongose.model("List", listSchema);
+  const List = mongoose.model("List", listSchema);
 
   export {
     List,

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const { Schema } = moongose;
+const { Schema } = mongoose;
 
 const songSchema = new Schema({
     "title": {
@@ -16,7 +16,7 @@ const songSchema = new Schema({
     }
   });
 
-const Song = moongose.model("Song", songSchema);
+const Song = mongoose.model("Song", songSchema);
 
 const songRepository = {
 

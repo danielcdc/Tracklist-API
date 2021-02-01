@@ -6,7 +6,7 @@ import { JwtService } from '../services/jwt/index.js';
 const AuthController = {
 
     register: (req, res) => {
-        let usuarioCreado = userRepository.create(
+        let usuarioCreado = userRepository.createUser(
             new User(req.body.nameFirst, 
                     req.body.nameLast,
                     req.body.nameUser,

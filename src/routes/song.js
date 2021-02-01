@@ -6,15 +6,14 @@ import { validar } from '../middlewares/validation.js'
 import { token } from '../services/passport/index.js';
 
 router.post('/songs', token(), songController.addSong);
-router.get('/songs', token(), songController.showSongs);
-router.get('/songs/:id', token(), [param(_id).exists().withMessage('Se debe proporcionar un ID.')], 
+router.get('/songs', token(), songController.showSong);
+router.get('/songs/:id', token(), 
     validar,
     songController.showSongById);
-router.put('/songs/:id', token(), [param(_id).exists().withMessage('Se debe proporcionar un ID.'),
-    ], 
+router.put('/songs/:id', token(),  
     validar,
-    songController.updateSong);
-router.delete('/songs/:id', token(), [param(_id).exists().withMessage('Se debe proporcionar un ID.')], 
+    songController.updateSongById);
+router.delete('/songs/:id', token(),  
     validar,
     songController.deleteSongById);
 

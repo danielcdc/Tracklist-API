@@ -39,7 +39,7 @@ const SongController = {
             res.status(200).json(modifiedSong);
         }
     },
-    delteSongById: async (req, res) => {
+    deleteSongById: async (req, res) => {
         const songToDelete = await songRepository.findById(req.params.id);
         if (songToDelete != undefined) {
             await songRepository.delete(req.params.id);
