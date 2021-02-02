@@ -70,13 +70,26 @@ const ListController = {
         }
     },
     showAllSongsFromList: async (req, res) => {
-        // Encontrar la lista 
-        let theList = await listRepository.findById(req.params.id_list).exec();
+        let theList = await listRepository.findById(req.params.id_list,'songs').exec();
         if(theList != undefined){
-            res.status(200).json(theList.songs)
+            res.status(200).json(theList)
         } else {
-            res.sendStatus(404);
+            res.sendStatus(404).withMessage("Lista no encontrada.");
         }
+    },
+
+    showOneSongFromList: async (req, res) => {
+        let theList = await listRepository.findById(req.params.id_list).exec();
+        if(theList != undefined) {
+            let trackList = theList.songs;
+            let theSong = await songRepository.findById(req.params.id_song);
+        } else {
+            res.sendStatus(404).withMessage("Lista no encontrada.");
+        }
+    },
+
+    deleteOneSongFromList: async (req, res) => {
+
     }
 
 

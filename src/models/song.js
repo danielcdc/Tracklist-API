@@ -32,7 +32,7 @@ const songRepository = {
 
   async createSong(newSong) {
     const theSong = {
-      type : newSong.type,
+      title : newSong.title,
       artist : newSong.artist,
       album : newSong.album,
       year : newSong.year

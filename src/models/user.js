@@ -2,11 +2,8 @@ import mongoose from 'mongoose';
 import 'dotenv/config.js';
 import bcrypt from 'bcryptjs';
 
-
-// Objeto esquema.
 const { Schema } = mongoose;
 
-// Definición del esquema de un usuario.
 const userSchema = new Schema({
     "nameFirst": {
       "type": "String"
@@ -25,7 +22,7 @@ const userSchema = new Schema({
     }
   });
 
-// Objeto modelo creado a partir del esquema.
+
 const User = mongoose.model("User", userSchema);
 
 const userRepository = {
@@ -47,7 +44,7 @@ const userRepository = {
 
     async createUser(newUser) {
 
-      const theUser = new User({
+      let theUser = new User({
         nameFirst : newUser.nameFirst,
         nameLast : newUser.nameLast,
         nameUser : newUser.nameUser,

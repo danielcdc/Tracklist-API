@@ -8,8 +8,8 @@ import { password } from '../services/passport/index.js';
 const router = Router();
 
 router.post('/register', [
-    body('username')
-        .isLength({min: 4})
+    body('nameUser')
+        .isLength({min: 5})
         .withMessage('La longitud mínima del nombre de usuario son 4 caracteres'),
     body('password').isLength({minLength: 6}).withMessage('La contraseña debe tener como mínimoo 6 caracteres'),
     body('email')

@@ -14,7 +14,7 @@ Proyecto de AD y PSP sobre una API REST.
     9) Express-validator
     10) Passport (local, jwt y jsonwebtoken)
 
-2. Añadida estructura inicial del proyecto (18/01/2021):
+2. Estructura del proyecto:
     - controllers
     - middlewares
     - models
@@ -22,3 +22,5 @@ Proyecto de AD y PSP sobre una API REST.
     - services
     - .env
     - index.js
+
+    

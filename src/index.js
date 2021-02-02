@@ -8,10 +8,8 @@ import morganBody from "morgan-body";
 import mongoose from 'mongoose'
 import passport from './services/passport/index.js'
 
-// Importación de componentes de la API
+
 import routes from './routes/index.js'
-
-
 
 const app = express();
 
@@ -28,8 +26,11 @@ app.use('/list', routes.list);
 app.use("/song", routes.song);
 app.use("/auth", routes.auth);
 
+// Inicialización de passport
+app.use(passport.initialize());
+
 // Conexión a MongoDB a través de Mongoose
-mongoose.connect(process.env.DB_URI, { userNewUrlParser:true, userUnifiedTopology: true }, (err) => {
+mongoose.connect(process.env.DB_URI, { userNewUrlParser: true, userUnifiedTopology: true }, (err) => {
   if (err) {
     console.log(`Error de conexión a la base de datos: ${JSON.stringify(err)}`);
   } else {
